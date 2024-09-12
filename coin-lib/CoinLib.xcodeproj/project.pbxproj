@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B1805B482C92447000746AE5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B1805B472C92447000746AE5 /* SnapKit */; };
 		B1C776742C922AE300365E07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C776732C922AE300365E07 /* AppDelegate.swift */; };
-		B1C776782C922AE300365E07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C776772C922AE300365E07 /* ViewController.swift */; };
 		B1C7767D2C922AE400365E07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1C7767C2C922AE400365E07 /* Assets.xcassets */; };
 		B1C776802C922AE400365E07 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B1C7767F2C922AE400365E07 /* Base */; };
 		B1C7768B2C922AE400365E07 /* CoinLibTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C7768A2C922AE400365E07 /* CoinLibTests.swift */; };
@@ -37,7 +36,6 @@
 /* Begin PBXFileReference section */
 		B1C776702C922AE300365E07 /* CoinLib.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinLib.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C776732C922AE300365E07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B1C776772C922AE300365E07 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B1C7767C2C922AE400365E07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1C7767F2C922AE400365E07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B1C776812C922AE400365E07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,6 +72,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B19C01032C939EE100DDF6E7 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		B19C01042C93A02200DDF6E7 /* AppConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				B1C7767E2C922AE400365E07 /* LaunchScreen.storyboard */,
+				B1C776812C922AE400365E07 /* Info.plist */,
+				B1C776732C922AE300365E07 /* AppDelegate.swift */,
+			);
+			path = AppConfiguration;
+			sourceTree = "<group>";
+		};
+		B19C01052C93A07100DDF6E7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B1C7767C2C922AE400365E07 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		B1C776672C922AE300365E07 = {
 			isa = PBXGroup;
 			children = (
@@ -97,11 +120,9 @@
 		B1C776722C922AE300365E07 /* CoinLib */ = {
 			isa = PBXGroup;
 			children = (
-				B1C776732C922AE300365E07 /* AppDelegate.swift */,
-				B1C776772C922AE300365E07 /* ViewController.swift */,
-				B1C7767C2C922AE400365E07 /* Assets.xcassets */,
-				B1C7767E2C922AE400365E07 /* LaunchScreen.storyboard */,
-				B1C776812C922AE400365E07 /* Info.plist */,
+				B19C01052C93A07100DDF6E7 /* Resources */,
+				B19C01042C93A02200DDF6E7 /* AppConfiguration */,
+				B19C01032C939EE100DDF6E7 /* Scenes */,
 			);
 			path = CoinLib;
 			sourceTree = "<group>";
@@ -259,7 +280,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1C776782C922AE300365E07 /* ViewController.swift in Sources */,
 				B1C776742C922AE300365E07 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,7 +455,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CoinLib/Info.plist;
+				INFOPLIST_FILE = CoinLib/AppConfiguration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -461,7 +481,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CoinLib/Info.plist;
+				INFOPLIST_FILE = CoinLib/AppConfiguration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
