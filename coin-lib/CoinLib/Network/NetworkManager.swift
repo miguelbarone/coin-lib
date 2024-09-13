@@ -24,6 +24,8 @@ protocol NetworkProtocol {
 }
 
 final class NetworkManager: NetworkProtocol {
+    private let API_KEY = "CC078ABA-D4A2-43ED-A17E-B8CCF60D40AF"
+
     let urlSession: URLSession
 
     init(urlSession: URLSession = URLSession.shared) {
@@ -40,6 +42,7 @@ final class NetworkManager: NetworkProtocol {
 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
+        urlRequest.addValue(API_KEY, forHTTPHeaderField: "Authorization")
 
         let dataTask = urlSession.dataTask(with: urlRequest) { data, response, error in
             if let error = error {

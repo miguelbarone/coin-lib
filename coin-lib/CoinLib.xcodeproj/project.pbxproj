@@ -12,6 +12,8 @@
 		B14D754A2C94C22000E92E1E /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14D75492C94C22000E92E1E /* DetailsPresenter.swift */; };
 		B14D754C2C94C22700E92E1E /* DetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14D754B2C94C22700E92E1E /* DetailsCoordinator.swift */; };
 		B14D754E2C94C23200E92E1E /* DetailsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14D754D2C94C23200E92E1E /* DetailsFactory.swift */; };
+		B14D75502C94C5CB00E92E1E /* ListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14D754F2C94C5CB00E92E1E /* ListRequest.swift */; };
+		B14D75532C94C7CD00E92E1E /* ExchangeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14D75522C94C7CD00E92E1E /* ExchangeModel.swift */; };
 		B19C010A2C93D48800DDF6E7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19C01092C93D48800DDF6E7 /* NetworkManager.swift */; };
 		B19C010C2C93D49100DDF6E7 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19C010B2C93D49100DDF6E7 /* Request.swift */; };
 		B19C01102C93E8F600DDF6E7 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19C010F2C93E8F600DDF6E7 /* ListViewController.swift */; };
@@ -51,6 +53,8 @@
 		B14D75492C94C22000E92E1E /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 		B14D754B2C94C22700E92E1E /* DetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCoordinator.swift; sourceTree = "<group>"; };
 		B14D754D2C94C23200E92E1E /* DetailsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsFactory.swift; sourceTree = "<group>"; };
+		B14D754F2C94C5CB00E92E1E /* ListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRequest.swift; sourceTree = "<group>"; };
+		B14D75522C94C7CD00E92E1E /* ExchangeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeModel.swift; sourceTree = "<group>"; };
 		B19C01092C93D48800DDF6E7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B19C010B2C93D49100DDF6E7 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		B19C010F2C93E8F600DDF6E7 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +100,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B14D75512C94C78400E92E1E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B14D75522C94C7CD00E92E1E /* ExchangeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B19C01032C939EE100DDF6E7 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +148,7 @@
 		B19C01082C93D47400DDF6E7 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				B14D754F2C94C5CB00E92E1E /* ListRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -143,6 +156,7 @@
 		B19C010D2C93E8A600DDF6E7 /* List */ = {
 			isa = PBXGroup;
 			children = (
+				B14D75512C94C78400E92E1E /* Model */,
 				B19C010F2C93E8F600DDF6E7 /* ListViewController.swift */,
 				B19C01112C93E8FF00DDF6E7 /* ListInteractor.swift */,
 				B19C01132C93E90500DDF6E7 /* ListPresenter.swift */,
@@ -349,6 +363,7 @@
 			files = (
 				B19C011A2C93E91900DDF6E7 /* ListFactory.swift in Sources */,
 				B19C01182C93E91200DDF6E7 /* ListCoordinator.swift in Sources */,
+				B14D75532C94C7CD00E92E1E /* ExchangeModel.swift in Sources */,
 				B19C01122C93E8FF00DDF6E7 /* ListInteractor.swift in Sources */,
 				B14D754C2C94C22700E92E1E /* DetailsCoordinator.swift in Sources */,
 				B19C01162C93E90C00DDF6E7 /* ListService.swift in Sources */,
@@ -356,6 +371,7 @@
 				B19C010A2C93D48800DDF6E7 /* NetworkManager.swift in Sources */,
 				B19C010C2C93D49100DDF6E7 /* Request.swift in Sources */,
 				B19C01102C93E8F600DDF6E7 /* ListViewController.swift in Sources */,
+				B14D75502C94C5CB00E92E1E /* ListRequest.swift in Sources */,
 				B19C01142C93E90500DDF6E7 /* ListPresenter.swift in Sources */,
 				B1C776742C922AE300365E07 /* AppDelegate.swift in Sources */,
 				B14D75482C94C21700E92E1E /* DetailsInteractor.swift in Sources */,

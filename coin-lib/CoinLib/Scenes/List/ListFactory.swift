@@ -10,6 +10,10 @@ import UIKit
 
 enum ListFactory {
     static func make() -> UIViewController {
-        ListViewController()
+        let service = ListService()
+        let interactor = ListInteractor(service: service)
+        let viewController = ListViewController(interactor: interactor)
+
+        return viewController
     }
 }

@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+protocol DetailsInteracting: AnyObject {
+    
+}
+
+final class DetailsInteractor: DetailsInteracting {
+    init() {
+        
+    }
+}
