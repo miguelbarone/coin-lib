@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "coin.png",
+      "filename" : "app-coin.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
