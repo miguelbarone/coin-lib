@@ -11,8 +11,11 @@ import UIKit
 enum ListFactory {
     static func make() -> UIViewController {
         let service = ListService()
-        let interactor = ListInteractor(service: service)
+        let presenter = ListPresenter()
+        let interactor = ListInteractor(presenter: presenter, service: service)
         let viewController = ListViewController(interactor: interactor)
+
+        presenter.viewController = viewController
 
         return viewController
     }

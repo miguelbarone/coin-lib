@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+protocol ListCoordinating: AnyObject {
+    func pushDetailsScreen(with exchange: ExchangeViewModel)
+}
+
+final class ListCoordinator: ListCoordinating {
+    func pushDetailsScreen(with exchange: ExchangeViewModel) {
+        
+    }
+}

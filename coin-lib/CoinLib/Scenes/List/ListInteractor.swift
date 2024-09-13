@@ -12,20 +12,27 @@ protocol ListInteracting: AnyObject {
 }
 
 final class ListInteractor: ListInteracting {
+    private let presenter: ListPresenting
     private let service: ListServicing
 
-    init(service: ListServicing) {
+    init(presenter: ListPresenting, service: ListServicing) {
+        self.presenter = presenter
         self.service = service
     }
 
     func fetchData() {
+        presenter.showLoading()
+
         service.getExchanges { [weak self] result in
             guard let self else { return }
+
+            presenter.hideLoading()
+
             switch result {
             case let .success(response):
-                print(response)
+                presenter.presentItems(response)
             case .failure:
-                print("faio")
+                presenter.presentErrorView()
             }
         }
     }

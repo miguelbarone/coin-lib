@@ -13,4 +13,5 @@ enum Space: CGFloat {
     case base02 = 12
     case base03 = 16
     case base04 = 20
+    case base05 = 48
 }

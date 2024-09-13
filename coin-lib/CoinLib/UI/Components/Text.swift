@@ -16,13 +16,23 @@ final class Text: UIView {
         }
     }
 
-    init(font: UIFont = Font.body, textAlignment: NSTextAlignment = .natural) {
+    var numberOfLines = 1 {
+        didSet {
+            body.numberOfLines = numberOfLines
+        }
+    }
+
+    init(font: UIFont = Font.body, textAlignment: NSTextAlignment = .natural, textColor: UIColor? = nil) {
         body.font = font
         body.textAlignment = textAlignment
         body.translatesAutoresizingMaskIntoConstraints = false
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         buildLayout()
+
+        if let textColor {
+            body.textColor = textColor
+        }
     }
 
     required init?(coder: NSCoder) { nil }
