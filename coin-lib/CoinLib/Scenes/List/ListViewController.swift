@@ -33,6 +33,7 @@ final class ListViewController: UIViewController {
         tableView.estimatedRowHeight = Layout.cellHeight
         tableView.register(ExchangeCell.self, forCellReuseIdentifier: Strings.Identifier.exchangeCell)
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.isScrollEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -63,7 +64,6 @@ final class ListViewController: UIViewController {
     }
 }
 
-// MARK: - ViewConfiguration
 extension ListViewController: ViewConfiguration {
     func buildHierarchy() {
         view.addSubview(tableView)
@@ -88,7 +88,6 @@ extension ListViewController: ViewConfiguration {
     }
 }
 
-// MARK: - ListDisplaying
 extension ListViewController: ListDisplaying {
     func showLoading() {
         loadingView.startAnimating()
@@ -128,6 +127,14 @@ extension ListViewController: UITableViewDataSource {
         }
         cell.setup(with: exchanges[indexPath.row])
         return cell
+    }
+}
+
+extension ListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedExchange = exchanges[indexPath.row]
+        interactor.didSelectRow(exchange: selectedExchange)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

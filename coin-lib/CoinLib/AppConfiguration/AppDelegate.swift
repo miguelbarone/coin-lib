@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow()
         let navigationController = UINavigationController(rootViewController: ListFactory.make())
 
+        let tintColor: UIColor = navigationController.traitCollection.userInterfaceStyle == .dark ? .white : .black
+        navigationController.navigationBar.tintColor = tintColor
         navigationController.navigationBar.prefersLargeTitles = true
 
         window.rootViewController = navigationController

@@ -11,11 +11,18 @@ protocol ListPresenting: AnyObject {
     func showLoading()
     func hideLoading()
     func presentItems(_ exchangesModel: [ExchangeModel])
+    func presentDetailsScreen(with exchange: ExchangeViewModel)
     func presentErrorView()
 }
 
 final class ListPresenter: ListPresenting {
+    private let coordinator: ListCoordinating
+
     weak var viewController: ListDisplaying?
+
+    init(coordinator: ListCoordinating) {
+        self.coordinator = coordinator
+    }
 
     func showLoading() {
         viewController?.showLoading()
@@ -27,6 +34,10 @@ final class ListPresenter: ListPresenting {
 
     func presentItems(_ exchangesModel: [ExchangeModel]) {
         viewController?.displayExchanges(mapToViewModel(exchangesModel))
+    }
+
+    func presentDetailsScreen(with exchange: ExchangeViewModel) {
+        coordinator.pushDetailsScreen(with: exchange)
     }
 
     func presentErrorView() {

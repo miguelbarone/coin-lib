@@ -9,6 +9,7 @@ import Foundation
 
 protocol ListInteracting: AnyObject {
     func fetchData()
+    func didSelectRow(exchange: ExchangeViewModel)
 }
 
 final class ListInteractor: ListInteracting {
@@ -35,5 +36,9 @@ final class ListInteractor: ListInteracting {
                 presenter.presentErrorView()
             }
         }
+    }
+
+    func didSelectRow(exchange: ExchangeViewModel) {
+        presenter.presentDetailsScreen(with: exchange)
     }
 }
