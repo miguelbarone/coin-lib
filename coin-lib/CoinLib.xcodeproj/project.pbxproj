@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B10A79BE2C94CE6F0018B18F /* ViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10A79BD2C94CE6F0018B18F /* ViewConfiguration.swift */; };
+		B10A79C12C94CE8D0018B18F /* Space.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10A79C02C94CE8D0018B18F /* Space.swift */; };
+		B10A79C42C94CEB60018B18F /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10A79C32C94CEB60018B18F /* Text.swift */; };
+		B10A79C62C94CECC0018B18F /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10A79C52C94CECC0018B18F /* Font.swift */; };
+		B10A79C82C94CF070018B18F /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10A79C72C94CF070018B18F /* Strings.swift */; };
 		B14D75462C94C20E00E92E1E /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14D75452C94C20E00E92E1E /* DetailsViewController.swift */; };
 		B14D75482C94C21700E92E1E /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14D75472C94C21700E92E1E /* DetailsInteractor.swift */; };
 		B14D754A2C94C22000E92E1E /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14D75492C94C22000E92E1E /* DetailsPresenter.swift */; };
@@ -48,6 +53,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B10A79BD2C94CE6F0018B18F /* ViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConfiguration.swift; sourceTree = "<group>"; };
+		B10A79C02C94CE8D0018B18F /* Space.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Space.swift; sourceTree = "<group>"; };
+		B10A79C32C94CEB60018B18F /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		B10A79C52C94CECC0018B18F /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		B10A79C72C94CF070018B18F /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		B14D75452C94C20E00E92E1E /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		B14D75472C94C21700E92E1E /* DetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
 		B14D75492C94C22000E92E1E /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
@@ -100,6 +110,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B10A79BC2C94CE610018B18F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B10A79C22C94CEAD0018B18F /* Components */,
+				B10A79BD2C94CE6F0018B18F /* ViewConfiguration.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		B10A79BF2C94CE870018B18F /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				B10A79C02C94CE8D0018B18F /* Space.swift */,
+				B10A79C52C94CECC0018B18F /* Font.swift */,
+				B10A79C72C94CF070018B18F /* Strings.swift */,
+			);
+			path = Commons;
+			sourceTree = "<group>";
+		};
+		B10A79C22C94CEAD0018B18F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B10A79C32C94CEB60018B18F /* Text.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		B14D75512C94C78400E92E1E /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +239,8 @@
 		B1C776722C922AE300365E07 /* CoinLib */ = {
 			isa = PBXGroup;
 			children = (
+				B10A79BF2C94CE870018B18F /* Commons */,
+				B10A79BC2C94CE610018B18F /* UI */,
 				B19C01072C93D46F00DDF6E7 /* Network */,
 				B19C01052C93A07100DDF6E7 /* Resources */,
 				B19C01042C93A02200DDF6E7 /* AppConfiguration */,
@@ -366,10 +405,15 @@
 				B14D75532C94C7CD00E92E1E /* ExchangeModel.swift in Sources */,
 				B19C01122C93E8FF00DDF6E7 /* ListInteractor.swift in Sources */,
 				B14D754C2C94C22700E92E1E /* DetailsCoordinator.swift in Sources */,
+				B10A79BE2C94CE6F0018B18F /* ViewConfiguration.swift in Sources */,
+				B10A79C42C94CEB60018B18F /* Text.swift in Sources */,
 				B19C01162C93E90C00DDF6E7 /* ListService.swift in Sources */,
 				B14D754E2C94C23200E92E1E /* DetailsFactory.swift in Sources */,
+				B10A79C12C94CE8D0018B18F /* Space.swift in Sources */,
 				B19C010A2C93D48800DDF6E7 /* NetworkManager.swift in Sources */,
 				B19C010C2C93D49100DDF6E7 /* Request.swift in Sources */,
+				B10A79C62C94CECC0018B18F /* Font.swift in Sources */,
+				B10A79C82C94CF070018B18F /* Strings.swift in Sources */,
 				B19C01102C93E8F600DDF6E7 /* ListViewController.swift in Sources */,
 				B14D75502C94C5CB00E92E1E /* ListRequest.swift in Sources */,
 				B19C01142C93E90500DDF6E7 /* ListPresenter.swift in Sources */,
