@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 enum DetailsFactory {
-    static func make() -> UIViewController {
+    static func make(exchange: ExchangeViewModel) -> UIViewController {
         DetailsViewController()
     }
 }

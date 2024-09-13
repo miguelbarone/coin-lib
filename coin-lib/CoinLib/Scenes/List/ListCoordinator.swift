@@ -16,7 +16,7 @@ final class ListCoordinator: ListCoordinating {
     weak var viewController: UIViewController?
 
     func pushDetailsScreen(with exchange: ExchangeViewModel) {
-        let detailsViewController = DetailsFactory.make()
+        let detailsViewController = DetailsFactory.make(exchange: exchange)
         viewController?.navigationController?.pushViewController(detailsViewController, animated: true)
     }
 }
