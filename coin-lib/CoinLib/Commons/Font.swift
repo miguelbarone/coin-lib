@@ -10,5 +10,6 @@ import UIKit
 enum Font {
     static let body = UIFont.systemFont(ofSize: 12)
     static let boldBody = UIFont.systemFont(ofSize: 12, weight: .bold)
+    static let medium = UIFont.systemFont(ofSize: 16)
     static let boldTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
 }

@@ -10,6 +10,14 @@ import UIKit
 
 enum DetailsFactory {
     static func make(exchange: ExchangeViewModel) -> UIViewController {
-        DetailsViewController()
+        let coordinator = DetailsCoordinator()
+        let presenter = DetailsPresenter(coordinator: coordinator)
+        let interactor = DetailsInteractor(presenter: presenter, exchange: exchange)
+        let viewController = DetailsViewController(interactor: interactor)
+
+        coordinator.viewController = viewController
+        presenter.viewController = viewController
+
+        return viewController
     }
 }

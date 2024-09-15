@@ -62,6 +62,11 @@ final class ListViewController: UIViewController {
         buildLayout()
         interactor.fetchData()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.largeTitleDisplayMode = .always
+    }
 }
 
 extension ListViewController: ViewConfiguration {
@@ -83,7 +88,7 @@ extension ListViewController: ViewConfiguration {
     }
 
     func configureViews() {
-        title = Strings.Exchange.title
+        title = Strings.Exchanges.title
         view.backgroundColor = .systemBackground
     }
 }

@@ -50,7 +50,7 @@ private extension ListPresenter {
         models.enumerated().map { index, model -> ExchangeViewModel in
             ExchangeViewModel(
                 hash: "\(index + 1)",
-                name: model.name ?? Strings.Exchange.defaultName,
+                name: model.name ?? Strings.Exchanges.defaultName,
                 id: model.exchangeId,
                 value: model.volume1DayUsd.formatted(.currency(code: Strings.usdCode)),
                 website: model.website

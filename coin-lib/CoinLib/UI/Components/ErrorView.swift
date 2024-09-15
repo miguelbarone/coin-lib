@@ -75,8 +75,8 @@ extension ErrorView: ViewConfiguration {
         addSubview(button)
 
         stackView.addArrangedSubview(imageView)
-        stackView.addArrangedSubview(titleText.body)
-        stackView.addArrangedSubview(descriptionText.body)
+        stackView.addArrangedSubview(titleText)
+        stackView.addArrangedSubview(descriptionText)
     }
 
     func setupConstraints() {

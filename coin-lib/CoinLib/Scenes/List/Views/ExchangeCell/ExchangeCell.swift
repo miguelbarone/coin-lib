@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 
 final class ExchangeCell: UITableViewCell {
+    fileprivate enum Layout {
+        static let valueTextMinWidth: CGFloat = 53
+    }
+
     private lazy var hashText = Text()
     private lazy var nameText = Text(font: Font.boldBody)
     private lazy var idText = Text(textColor: .systemGray)
@@ -54,11 +58,12 @@ extension ExchangeCell: ViewConfiguration {
 
             valueText.centerYAnchor.constraint(equalTo: infoStackView.centerYAnchor),
             valueText.leadingAnchor.constraint(greaterThanOrEqualTo: infoStackView.trailingAnchor, constant: Space.base01.rawValue),
-            valueText.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Space.base01.rawValue)
+            valueText.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Space.base01.rawValue),
+            valueText.widthAnchor.constraint(greaterThanOrEqualToConstant: Layout.valueTextMinWidth)
         ])
     }
 
     func configureViews() {
-        infoStackView.setCustomSpacing(Space.base00.rawValue, after: nameText)
+        nameText.numberOfLines = .zero
     }
 }
