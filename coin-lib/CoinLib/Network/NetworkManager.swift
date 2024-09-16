@@ -11,7 +11,7 @@ enum API {
     static let baseURL = "https://rest.coinapi.io/v1"
 }
 
-enum NetworkError: Error {
+enum NetworkError: Error, Equatable {
     case invalidURL
     case invalidResponse
     case noData
