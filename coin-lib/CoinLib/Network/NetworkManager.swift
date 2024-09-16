@@ -24,7 +24,7 @@ protocol NetworkProtocol {
 }
 
 final class NetworkManager: NetworkProtocol {
-    private let API_KEY = "CC078ABA-D4A2-43ED-A17E-B8CCF60D40AF"
+    private let API_KEY = ""
 
     let urlSession: URLSession
 
