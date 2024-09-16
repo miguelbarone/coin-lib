@@ -65,5 +65,6 @@ extension ExchangeCell: ViewConfiguration {
 
     func configureViews() {
         nameText.numberOfLines = .zero
+        infoStackView.setCustomSpacing(Space.base00.rawValue, after: nameText)
     }
 }
