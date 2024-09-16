@@ -49,7 +49,6 @@
 		B1C7767D2C922AE400365E07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1C7767C2C922AE400365E07 /* Assets.xcassets */; };
 		B1C776802C922AE400365E07 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B1C7767F2C922AE400365E07 /* Base */; };
 		B1C776952C922AE400365E07 /* CoinLibUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C776942C922AE400365E07 /* CoinLibUITests.swift */; };
-		B1C776972C922AE400365E07 /* CoinLibUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C776962C922AE400365E07 /* CoinLibUITestsLaunchTests.swift */; };
 		B1D5647E2C96756400ECA99A /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D5647D2C96756400ECA99A /* NetworkManagerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -117,7 +116,6 @@
 		B1C776862C922AE400365E07 /* CoinLibTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoinLibTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C776902C922AE400365E07 /* CoinLibUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoinLibUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1C776942C922AE400365E07 /* CoinLibUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinLibUITests.swift; sourceTree = "<group>"; };
-		B1C776962C922AE400365E07 /* CoinLibUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinLibUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B1D5647D2C96756400ECA99A /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -371,7 +369,6 @@
 			isa = PBXGroup;
 			children = (
 				B1C776942C922AE400365E07 /* CoinLibUITests.swift */,
-				B1C776962C922AE400365E07 /* CoinLibUITestsLaunchTests.swift */,
 			);
 			path = CoinLibUITests;
 			sourceTree = "<group>";
@@ -573,7 +570,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1C776952C922AE400365E07 /* CoinLibUITests.swift in Sources */,
-				B1C776972C922AE400365E07 /* CoinLibUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,7 +737,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ninadominique.CoinLib;
+				PRODUCT_BUNDLE_IDENTIFIER = miguelbarone.CoinLib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -767,7 +763,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ninadominique.CoinLib;
+				PRODUCT_BUNDLE_IDENTIFIER = miguelbarone.CoinLib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -785,7 +781,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ninadominique.CoinLibTests;
+				PRODUCT_BUNDLE_IDENTIFIER = miguelbarone.CoinLibTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -804,7 +800,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ninadominique.CoinLibTests;
+				PRODUCT_BUNDLE_IDENTIFIER = miguelbarone.CoinLibTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -821,7 +817,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ninadominique.CoinLibUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = miguelbarone.CoinLibUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -838,7 +834,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ninadominique.CoinLibUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = miguelbarone.CoinLibUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;

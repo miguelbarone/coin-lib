@@ -63,6 +63,7 @@ final class DetailsViewController: UIViewController {
         button.titleLabel?.font = Font.boldBody
         button.addTarget(self, action: #selector(didTapWebsiteButton), for: .touchUpInside)
         button.isHidden = true
+        button.accessibilityIdentifier = "websiteButton"
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

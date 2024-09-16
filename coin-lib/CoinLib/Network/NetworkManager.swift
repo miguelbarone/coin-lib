@@ -17,6 +17,7 @@ enum NetworkError: Error, Equatable {
     case noData
     case decodingError(description: String)
     case requestError(description: String)
+    case invalidEnviroment
 }
 
 protocol NetworkProtocol {
@@ -34,6 +35,11 @@ final class NetworkManager: NetworkProtocol {
 
     func execute<T: Decodable>(with request: Request, completion: @escaping (Result<T, Error>) -> Void) {
         let url = URL(string: API.baseURL + request.endpoint)
+        let isUITesting = ProcessInfo().arguments.contains("UI-TESTING")
+
+        if isUITesting {
+            return executeJSON(endpoint: request.endpoint, completion: completion)
+        }
 
         guard let url else {
             completion(.failure(NetworkError.invalidURL))
@@ -71,5 +77,28 @@ final class NetworkManager: NetworkProtocol {
         }
 
         dataTask.resume()
+    }
+}
+
+private extension NetworkManager {
+    func executeJSON<T: Decodable>(endpoint: String, completion: @escaping (Result<T, Error>) -> Void) {
+        guard let json = ProcessInfo().environment[endpoint] else {
+            completion(.failure(NetworkError.invalidEnviroment))
+            return
+        }
+
+        guard let data = json.data(using: .utf8) else {
+            completion(.failure(NetworkError.noData))
+            return
+        }
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+            let result = try decoder.decode(T.self, from: data)
+            completion(.success(result))
+        } catch {
+            completion(.failure(NetworkError.decodingError(description: error.localizedDescription)))
+        }
     }
 }
