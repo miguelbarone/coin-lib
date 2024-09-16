@@ -5,11 +5,11 @@
 //  Created by Miguel Barone on 16/09/24.
 //
 
-import XCTest
 @testable import CoinLib
+import XCTest
 
-class ListFactoryTests: XCTestCase {
-    func testMake() {
+final class ListFactoryTests: XCTestCase {
+    func testMake_ShouldReturnListViewController() {
         let viewController = ListFactory.make()
 
         XCTAssertTrue(viewController is ListViewController)

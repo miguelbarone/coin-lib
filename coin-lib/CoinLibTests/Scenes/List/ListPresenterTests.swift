@@ -47,7 +47,7 @@ class ListCoordinatorSpy: ListCoordinating {
     }
 }
 
-class ListPresenterTests: XCTestCase {
+final class ListPresenterTests: XCTestCase {
     var coordinatorSpy: ListCoordinatorSpy!
     var viewControllerSpy: ListDisplayingSpy!
     var presenter: ListPresenter!

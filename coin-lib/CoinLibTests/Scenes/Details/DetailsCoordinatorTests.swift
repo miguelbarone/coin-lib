@@ -1,24 +1,24 @@
 //
-//  ListCoordinatorTests.swift
+//  DetailsCoordinatorTests.swift
 //  CoinLibTests
 //
 //  Created by Miguel Barone on 16/09/24.
 //
 
 @testable import CoinLib
+import SafariServices
 import XCTest
 
-final class ListCoordinatorTests: XCTestCase {
-    var coordinator: ListCoordinator!
+class DetailsCoordinatorTests: XCTestCase {
+    var coordinator: DetailsCoordinator!
     var navigationControllerSpy: NavigationControllerSpy!
     var viewController: UIViewController!
 
     override func setUp() {
         super.setUp()
-        coordinator = ListCoordinator()
+        coordinator = DetailsCoordinator()
         navigationControllerSpy = NavigationControllerSpy()
         viewController = UIViewController()
-
         navigationControllerSpy.viewControllers = [viewController]
         coordinator.viewController = viewController
     }
@@ -30,12 +30,12 @@ final class ListCoordinatorTests: XCTestCase {
         super.tearDown()
     }
 
-    func testPushDetailsScreen() {
-        let exchangeViewModel = ExchangeViewModel.mock()
+    func testOpenWebsite_ShouldPushSFSafariViewController() throws {
+        let url = try XCTUnwrap(URL(string: "http://example.com"))
 
-        coordinator.pushDetailsScreen(with: exchangeViewModel)
-
+        coordinator.openWebsite(url: url)
+        
         XCTAssertEqual(navigationControllerSpy.viewControllers.count, 2)
-        XCTAssertTrue(navigationControllerSpy.pushedViewController is DetailsViewController)
+        XCTAssertTrue(navigationControllerSpy.pushedViewController is SFSafariViewController)
     }
 }

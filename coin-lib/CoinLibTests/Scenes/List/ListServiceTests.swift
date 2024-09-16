@@ -5,10 +5,10 @@
 //  Created by Miguel Barone on 16/09/24.
 //
 
-import XCTest
 @testable import CoinLib
+import XCTest
 
-class ListServiceTests: XCTestCase {
+final class ListServiceTests: XCTestCase {
     var networkSpy: NetworkSpy!
     var service: ListService!
 

@@ -26,6 +26,10 @@
 		B13212642C9874E3005E5C11 /* ListFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13212632C9874E3005E5C11 /* ListFactoryTests.swift */; };
 		B13212662C98764B005E5C11 /* ListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13212652C98764B005E5C11 /* ListServiceTests.swift */; };
 		B13212682C98766C005E5C11 /* NetworkSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13212672C98766C005E5C11 /* NetworkSpy.swift */; };
+		B132126A2C989284005E5C11 /* DetailsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13212692C989283005E5C11 /* DetailsInteractorTests.swift */; };
+		B132126C2C989355005E5C11 /* DetailsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B132126B2C989355005E5C11 /* DetailsPresenterTests.swift */; };
+		B132126E2C989536005E5C11 /* DetailsFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B132126D2C989536005E5C11 /* DetailsFactoryTests.swift */; };
+		B13212702C9895A9005E5C11 /* DetailsCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B132126F2C9895A9005E5C11 /* DetailsCoordinatorTests.swift */; };
 		B14D75462C94C20E00E92E1E /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14D75452C94C20E00E92E1E /* DetailsViewController.swift */; };
 		B14D75482C94C21700E92E1E /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14D75472C94C21700E92E1E /* DetailsInteractor.swift */; };
 		B14D754A2C94C22000E92E1E /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14D75492C94C22000E92E1E /* DetailsPresenter.swift */; };
@@ -86,6 +90,10 @@
 		B13212632C9874E3005E5C11 /* ListFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFactoryTests.swift; sourceTree = "<group>"; };
 		B13212652C98764B005E5C11 /* ListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListServiceTests.swift; sourceTree = "<group>"; };
 		B13212672C98766C005E5C11 /* NetworkSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSpy.swift; sourceTree = "<group>"; };
+		B13212692C989283005E5C11 /* DetailsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInteractorTests.swift; sourceTree = "<group>"; };
+		B132126B2C989355005E5C11 /* DetailsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenterTests.swift; sourceTree = "<group>"; };
+		B132126D2C989536005E5C11 /* DetailsFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsFactoryTests.swift; sourceTree = "<group>"; };
+		B132126F2C9895A9005E5C11 /* DetailsCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCoordinatorTests.swift; sourceTree = "<group>"; };
 		B14D75452C94C20E00E92E1E /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		B14D75472C94C21700E92E1E /* DetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
 		B14D75492C94C22000E92E1E /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
@@ -218,6 +226,10 @@
 		B1320EC72C9869AB005E5C11 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				B13212692C989283005E5C11 /* DetailsInteractorTests.swift */,
+				B132126B2C989355005E5C11 /* DetailsPresenterTests.swift */,
+				B132126D2C989536005E5C11 /* DetailsFactoryTests.swift */,
+				B132126F2C9895A9005E5C11 /* DetailsCoordinatorTests.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -542,11 +554,15 @@
 				B1320ECD2C986D32005E5C11 /* ExchangeViewModel+Mocks.swift in Sources */,
 				B1D5647E2C96756400ECA99A /* NetworkManagerTests.swift in Sources */,
 				B1320EC22C98641D005E5C11 /* DecodableModel.swift in Sources */,
+				B13212702C9895A9005E5C11 /* DetailsCoordinatorTests.swift in Sources */,
+				B132126E2C989536005E5C11 /* DetailsFactoryTests.swift in Sources */,
+				B132126A2C989284005E5C11 /* DetailsInteractorTests.swift in Sources */,
 				B1320ECF2C986E90005E5C11 /* ListPresenterTests.swift in Sources */,
 				B13212642C9874E3005E5C11 /* ListFactoryTests.swift in Sources */,
 				B13212622C987420005E5C11 /* NavigationControllerSpy.swift in Sources */,
 				B13212662C98764B005E5C11 /* ListServiceTests.swift in Sources */,
 				B13212682C98766C005E5C11 /* NetworkSpy.swift in Sources */,
+				B132126C2C989355005E5C11 /* DetailsPresenterTests.swift in Sources */,
 				B1320EC92C986AEE005E5C11 /* ListInteractorTests.swift in Sources */,
 				B1320EC42C98646D005E5C11 /* RequestMock.swift in Sources */,
 			);

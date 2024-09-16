@@ -8,13 +8,13 @@
 @testable import CoinLib
 
 extension ExchangeViewModel {
-    static func mock() -> Self {
+    static func mock(website: String? = "https://test.com") -> Self {
         ExchangeViewModel(
             hash: "1",
             name: "test",
             id: "test-id",
             value: "US$ 200,00",
-            website: "https://test.com"
+            website: website
         )
     }
 }

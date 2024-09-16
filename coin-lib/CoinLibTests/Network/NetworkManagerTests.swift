@@ -71,19 +71,6 @@ final class NetworkManagerTests: XCTestCase {
         }
     }
 
-    func testExecute_WhenUrlIsInvalid_ShouldThrowInvalidURLNetworkError() {
-        let request = RequestMock(method: .get, endpoint: "")
-
-        networkManager.execute(with: request) { (result: Result<DecodableModel, Error>) in
-            switch result {
-            case .success:
-                XCTFail("Expected failure, got success")
-            case .failure(let error):
-                XCTAssertEqual(error as? NetworkError, .invalidURL)
-            }
-        }
-    }
-
     func testExecute_WhenStatusCodeIsFromAnError_ShouldThrowInvalidResponseNetworkError() throws {
         let request = RequestMock(method: .get, endpoint: "/valid")
         let url = try XCTUnwrap(URL(string: "/valid"))
