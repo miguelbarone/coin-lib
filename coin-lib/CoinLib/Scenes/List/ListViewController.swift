@@ -36,14 +36,14 @@ final class ListViewController: UIViewController {
         tableView.delegate = self
         tableView.isScrollEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.accessibilityIdentifier = "listTableView"
+        tableView.accessibilityIdentifier = Strings.Identifier.listTableView
         return tableView
     }()
 
     private lazy var errorView: ErrorView = {
         let errorView = ErrorView()
         errorView.delegate = self
-        errorView.accessibilityIdentifier = "errorView"
+        errorView.accessibilityIdentifier = Strings.Identifier.errorView
         errorView.translatesAutoresizingMaskIntoConstraints = false
         return errorView
     }()

@@ -17,7 +17,7 @@ enum NetworkError: Error, Equatable {
     case noData
     case decodingError(description: String)
     case requestError(description: String)
-    case invalidEnviroment
+    case invalidEnvironment
 }
 
 protocol NetworkProtocol {
@@ -83,7 +83,7 @@ final class NetworkManager: NetworkProtocol {
 private extension NetworkManager {
     func executeJSON<T: Decodable>(endpoint: String, completion: @escaping (Result<T, Error>) -> Void) {
         guard let json = ProcessInfo().environment[endpoint] else {
-            completion(.failure(NetworkError.invalidEnviroment))
+            completion(.failure(NetworkError.invalidEnvironment))
             return
         }
 

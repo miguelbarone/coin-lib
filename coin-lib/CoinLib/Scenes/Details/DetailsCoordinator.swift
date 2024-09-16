@@ -17,7 +17,7 @@ final class DetailsCoordinator: DetailsCoordinating {
 
     func openWebsite(url: URL) {
         let safariViewController = SFSafariViewController(url: url)
-        safariViewController.title = "Website"
+        safariViewController.title = Strings.Details.websiteTitle
         viewController?.navigationController?.pushViewController(safariViewController, animated: true)
     }
 }
