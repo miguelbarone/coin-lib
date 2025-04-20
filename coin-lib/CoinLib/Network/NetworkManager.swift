@@ -65,28 +65,6 @@ final class NetworkManager: NetworkProtocol {
 }
 
 private extension NetworkManager {
-    func executeJSON<T: Decodable>(endpoint: String, completion: @escaping (Result<T, Error>) -> Void) {
-        guard let json = ProcessInfo().environment[endpoint] else {
-            completion(.failure(NetworkError.invalidEnvironment))
-            return
-        }
-
-        guard let data = json.data(using: .utf8) else {
-            completion(.failure(NetworkError.noData))
-            return
-        }
-
-        do {
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-
-            let result = try decoder.decode(T.self, from: data)
-            completion(.success(result))
-        } catch {
-            completion(.failure(NetworkError.decodingError(description: error.localizedDescription)))
-        }
-    }
-
     func executeJSON<T: Decodable>(endpoint: String) throws -> T {
         guard let json = ProcessInfo().environment[endpoint] else {
             throw NetworkError.invalidEnvironment
