@@ -24,51 +24,23 @@ final class ListServiceTests: XCTestCase {
         super.tearDown()
     }
 
-    func testGetExchanges_WhenResultIsSuccess_ShouldReturnExchanges() {
-        let exchangeModels = [ExchangeModel.mock()]
-        networkSpy.executeResult = .success(exchangeModels)
+    func testGetExchanges_WhenResultIsSuccess_ShouldReturnExchanges() async throws {
+        let exchangeResponse = [ExchangeResponse.mock()]
+        networkSpy.setResult(exchangeResponse)
 
-        var result: Result<[ExchangeModel], Error>?
-        let expectation = XCTestExpectation(description: "Completion handler called")
+        let result = try await service.getExchanges()
 
-        service.getExchanges { res in
-            result = res
-            expectation.fulfill()
-        }
-
-        wait(for: [expectation], timeout: 1.0)
-
-        switch result {
-        case .success(let exchanges):
-            XCTAssertEqual(exchanges, exchangeModels)
-        case .failure:
-            XCTFail("Expected success, got failure")
-        case .none:
-            XCTFail("Completion handler not called")
-        }
+        XCTAssertEqual(result, exchangeResponse)
     }
 
-    func testGetExchanges_WhenResultIsFailure_ShouldReceiveError() {
-        let error = NSError(domain: "", code: 0, userInfo: nil)
-        networkSpy.executeResult = .failure(error)
+    func testGetExchanges_WhenResultIsFailure_ShouldReceiveError() async throws {
+        networkSpy.setError(NetworkError.invalidURL)
 
-        var result: Result<[ExchangeModel], Error>?
-        let expectation = XCTestExpectation(description: "Completion handler called")
-
-        service.getExchanges { res in
-            result = res
-            expectation.fulfill()
-        }
-
-        wait(for: [expectation], timeout: 1.0)
-
-        switch result {
-        case .success:
-            XCTFail("Expected failure, got success")
-        case .failure(let receivedError as NSError):
-            XCTAssertEqual(receivedError, error)
-        case .none:
-            XCTFail("Completion handler not called")
+        do {
+            let _ = try await service.getExchanges()
+        } catch {
+            XCTAssertEqual(try XCTUnwrap(error as? NetworkError), NetworkError.invalidURL)
+            XCTAssertEqual(networkSpy.fetchResult, nil)
         }
     }
 }

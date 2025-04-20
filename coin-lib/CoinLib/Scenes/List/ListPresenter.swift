@@ -10,8 +10,8 @@ import Foundation
 protocol ListPresenting: AnyObject {
     func showLoading()
     func hideLoading()
-    func presentItems(_ exchangesModel: [ExchangeModel])
-    func presentDetailsScreen(with exchange: ExchangeViewModel)
+    func presentItems(_ exchangesModel: [ExchangeResponse])
+    func presentDetailsScreen(with exchange: ExchangeModel)
     func presentErrorView()
 }
 
@@ -32,11 +32,11 @@ final class ListPresenter: ListPresenting {
         viewController?.hideLoading()
     }
 
-    func presentItems(_ exchangesModel: [ExchangeModel]) {
+    func presentItems(_ exchangesModel: [ExchangeResponse]) {
         viewController?.displayExchanges(mapToViewModel(exchangesModel))
     }
 
-    func presentDetailsScreen(with exchange: ExchangeViewModel) {
+    func presentDetailsScreen(with exchange: ExchangeModel) {
         coordinator.pushDetailsScreen(with: exchange)
     }
 
@@ -46,9 +46,9 @@ final class ListPresenter: ListPresenting {
 }
 
 private extension ListPresenter {
-    func mapToViewModel(_ models: [ExchangeModel]) -> [ExchangeViewModel] {
-        models.enumerated().map { index, model -> ExchangeViewModel in
-            ExchangeViewModel(
+    func mapToViewModel(_ models: [ExchangeResponse]) -> [ExchangeModel] {
+        models.enumerated().map { index, model -> ExchangeModel in
+            ExchangeModel(
                 hash: "\(index + 1)",
                 name: model.name ?? Strings.Exchanges.defaultName,
                 id: model.exchangeId,

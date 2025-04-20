@@ -32,7 +32,7 @@ final class ExchangeCell: UITableViewCell {
 
     required init?(coder: NSCoder) { nil }
 
-    func setup(with model: ExchangeViewModel) {
+    func setup(with model: ExchangeModel) {
         hashText.value = model.hash
         nameText.value = model.name
         idText.value = model.id

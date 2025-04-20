@@ -9,7 +9,7 @@ import Foundation
 
 protocol ListInteracting: AnyObject {
     func fetchData()
-    func didSelectRow(exchange: ExchangeViewModel)
+    func didSelectRow(exchange: ExchangeModel)
 }
 
 final class ListInteractor: ListInteracting {
@@ -22,23 +22,28 @@ final class ListInteractor: ListInteracting {
     }
 
     func fetchData() {
-        presenter.showLoading()
-
-        service.getExchanges { [weak self] result in
-            guard let self else { return }
-
-            presenter.hideLoading()
-
-            switch result {
-            case let .success(response):
-                presenter.presentItems(response)
-            case .failure:
-                presenter.presentErrorView()
-            }
+        Task {
+            await fetchExchanges()
         }
     }
 
-    func didSelectRow(exchange: ExchangeViewModel) {
+    func didSelectRow(exchange: ExchangeModel) {
         presenter.presentDetailsScreen(with: exchange)
+    }
+}
+
+private extension ListInteractor {
+    @MainActor
+    func fetchExchanges() async {
+        presenter.showLoading()
+
+        do {
+            let response = try await service.getExchanges()
+            presenter.presentItems(response)
+        } catch {
+            presenter.presentErrorView()
+        }
+
+        presenter.hideLoading()
     }
 }

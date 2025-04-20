@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ExchangeViewModel: Equatable {
+struct ExchangeModel: Equatable {
     let hash: String
     let name: String
     let id: String

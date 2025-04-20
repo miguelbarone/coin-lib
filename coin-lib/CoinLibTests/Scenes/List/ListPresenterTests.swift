@@ -12,7 +12,7 @@ final class ListDisplayingSpy: ListDisplaying {
     enum Message: Equatable {
         case showLoading
         case hideLoading
-        case displayExchanges(exchanges: [ExchangeViewModel])
+        case displayExchanges(exchanges: [ExchangeModel])
         case displayErrorView
     }
 
@@ -26,7 +26,7 @@ final class ListDisplayingSpy: ListDisplaying {
         messages.append(.hideLoading)
     }
 
-    func displayExchanges(_ exchanges: [ExchangeViewModel]) {
+    func displayExchanges(_ exchanges: [ExchangeModel]) {
         messages.append(.displayExchanges(exchanges: exchanges))
     }
 
@@ -37,12 +37,12 @@ final class ListDisplayingSpy: ListDisplaying {
 
 class ListCoordinatorSpy: ListCoordinating {
     enum Message: Equatable {
-        case pushDetailsScreen(exchange: ExchangeViewModel)
+        case pushDetailsScreen(exchange: ExchangeModel)
     }
 
     private(set) var messages = [Message]()
 
-    func pushDetailsScreen(with exchange: ExchangeViewModel) {
+    func pushDetailsScreen(with exchange: ExchangeModel) {
         messages.append(.pushDetailsScreen(exchange: exchange))
     }
 }
@@ -80,15 +80,15 @@ final class ListPresenterTests: XCTestCase {
     }
 
     func testPresentItems_ShouldDisplayExchanges() {
-        let exchangeModels = [ExchangeModel.mock()]
+        let exchangeResponse = [ExchangeResponse.mock()]
 
-        presenter.presentItems(exchangeModels)
+        presenter.presentItems(exchangeResponse)
 
-        XCTAssertEqual(viewControllerSpy.messages, [.displayExchanges(exchanges: [ExchangeViewModel.mock()])])
+        XCTAssertEqual(viewControllerSpy.messages, [.displayExchanges(exchanges: [ExchangeModel.mock()])])
     }
 
     func testPresentDetailsScreen_ShouldCallCoordinatorToPushDetailsScreen() {
-        let exchangeViewModel = ExchangeViewModel.mock()
+        let exchangeViewModel = ExchangeModel.mock()
 
         presenter.presentDetailsScreen(with: exchangeViewModel)
 

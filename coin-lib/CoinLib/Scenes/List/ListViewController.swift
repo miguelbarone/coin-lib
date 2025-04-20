@@ -11,7 +11,7 @@ import UIKit
 protocol ListDisplaying: AnyObject {
     func showLoading()
     func hideLoading()
-    func displayExchanges(_ exchanges: [ExchangeViewModel])
+    func displayExchanges(_ exchanges: [ExchangeModel])
     func displayErrorView()
 }
 
@@ -50,7 +50,7 @@ final class ListViewController: UIViewController {
 
     private let interactor: ListInteracting
 
-    private var exchanges = [ExchangeViewModel]()
+    private var exchanges = [ExchangeModel]()
 
     init(interactor: ListInteracting) {
         self.interactor = interactor
@@ -104,7 +104,7 @@ extension ListViewController: ListDisplaying {
         loadingView.stopAnimating()
     }
 
-    func displayExchanges(_ exchanges: [ExchangeViewModel]) {
+    func displayExchanges(_ exchanges: [ExchangeModel]) {
         self.exchanges = exchanges
 
         tableView.reloadData()

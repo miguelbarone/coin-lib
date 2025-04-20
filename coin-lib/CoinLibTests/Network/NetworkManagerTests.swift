@@ -9,27 +9,16 @@ import Foundation
 import XCTest
 @testable import CoinLib
 
-final class URLSessionSpy: URLSession {
+final class URLSessionSpy: URLSessionProtocol {
     var data: Data?
-    var response: HTTPURLResponse?
+    var response: URLResponse?
     var error: Error?
 
-    private let dataTask = URLSessionDataTaskSpy()
-
-    override func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        dataTask.completion = { [weak self] in
-            guard let self else { return }
-            completionHandler(data, response, error)
+    func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+        if let error {
+            throw error
         }
-        return dataTask
-    }
-}
-
-final class URLSessionDataTaskSpy: URLSessionDataTask {
-    var completion: () -> Void = {}
-
-    override func resume() {
-        completion()
+        return (data ?? Data(), response ?? URLResponse())
     }
 }
 
@@ -49,8 +38,9 @@ final class NetworkManagerTests: XCTestCase {
         super.tearDown()
     }
 
-    func testExecute_WhenDataAndResponseIsValid_ShouldDecodeDataAndCompareValues() throws {
-        let data = DecodableModel.json.data(using: .utf8)
+    func testFetch_WhenDataAndResponseIsValid_ShouldDecodeDataAndCompareValues() async throws {
+        let model = CodableModel(id: 1, name: "Test")
+        let data = try JSONEncoder().encode(model)
         let request = RequestMock(method: .get, endpoint: "/valid")
         let url = try XCTUnwrap(URL(string: "/valid"))
 
@@ -60,68 +50,64 @@ final class NetworkManagerTests: XCTestCase {
                                               httpVersion: nil,
                                               headerFields: nil)
 
-        networkManager.execute(with: request) { (result: Result<DecodableModel, Error>) in
-            switch result {
-            case .success(let model):
-                XCTAssertEqual(model.id, 1)
-                XCTAssertEqual(model.name, "Test")
-            case .failure:
-                XCTFail("Expected success, got failure")
-            }
+        let result: CodableModel = try await networkManager.fetch(request: request)
+
+        XCTAssertEqual(result, model)
+    }
+
+    func testFetch_WhenResponseIsNil_ShouldThrowInvalidResponseError() async throws {
+        let request = RequestMock(method: .get, endpoint: "/valid")
+
+        sessionSpy.response = nil
+
+        do {
+            let _: CodableModel = try await networkManager.fetch(request: request)
+            XCTFail("Expected to throw invalidResponse error")
+        } catch let error as NetworkError {
+            XCTAssertEqual(error, .invalidResponse)
+        } catch {
+            XCTFail("Expected to throw invalidResponse error")
         }
     }
 
-    func testExecute_WhenStatusCodeIsFromAnError_ShouldThrowInvalidResponseNetworkError() throws {
+    func testFetch_WhenIsErrorStatusCode_ShouldThrowRequestErrorWithStatusCode() async throws {
         let request = RequestMock(method: .get, endpoint: "/valid")
         let url = try XCTUnwrap(URL(string: "/valid"))
+        
+        sessionSpy.response = HTTPURLResponse(
+            url: url,
+            statusCode: 500,
+            httpVersion: nil,
+            headerFields: nil
+        )
 
-        sessionSpy.data = Data()
-        sessionSpy.response = HTTPURLResponse(url: url,
-                                              statusCode: 500,
-                                              httpVersion: nil,
-                                              headerFields: nil)
-
-        networkManager.execute(with: request) { (result: Result<DecodableModel, Error>) in
-            switch result {
-            case .success:
-                XCTFail("Expected failure, got success")
-            case .failure(let error):
-                XCTAssertEqual(error as? NetworkError, .invalidResponse)
-            }
+        do {
+            let _: CodableModel = try await networkManager.fetch(request: request)
+            XCTFail("Expected to throw requestError")
+        } catch let error as NetworkError {
+            XCTAssertEqual(error, .requestError(description: "Unexpected error: 500"))
+        } catch {
+            XCTFail("Expected to throw requestError")
         }
     }
 
-    func testExecute_WhenDataIsInvalid_ShouldThrowNoDataNetworkError() throws {
+    func testFetch_WhenDataIsInvalid_ShouldReturnDecodingError() async throws {
         let request = RequestMock(method: .get, endpoint: "/valid")
         let url = try XCTUnwrap(URL(string: "/valid"))
 
+        sessionSpy.data = Data("invalid".utf8)
         sessionSpy.response = HTTPURLResponse(url: url,
                                               statusCode: 200,
                                               httpVersion: nil,
                                               headerFields: nil)
 
-        networkManager.execute(with: request) { (result: Result<DecodableModel, Error>) in
-            switch result {
-            case .success:
-                XCTFail("Expected failure, got success")
-            case .failure(let error):
-                XCTAssertEqual(error as? NetworkError, .noData)
-            }
-        }
-    }
-
-    func testExecute_WhenErrorInSessionIsNotNil_ShouldThrowRequesErrorWithCustomizedMessage() {
-        let request = RequestMock(method: .get, endpoint: "/valid")
-
-        sessionSpy.error = NSError(domain: "TestError", code: 1, userInfo: nil)
-
-        networkManager.execute(with: request) { (result: Result<DecodableModel, Error>) in
-            switch result {
-            case .success:
-                XCTFail("Expected failure, got success")
-            case .failure(let error):
-                XCTAssertEqual(error as? NetworkError, .requestError(description: "The operation couldn’t be completed. (TestError error 1.)"))
-            }
+        do {
+            let _: CodableModel = try await networkManager.fetch(request: request)
+            XCTFail("Expected to throw decodingError")
+        } catch let error as NetworkError {
+            XCTAssertEqual(error, .decodingError(description: "The data couldn’t be read because it isn’t in the correct format."))
+        } catch {
+            XCTFail("Expected to throw decodingError")
         }
     }
 }

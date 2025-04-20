@@ -31,7 +31,7 @@ final class ListCoordinatorTests: XCTestCase {
     }
 
     func testPushDetailsScreen() {
-        let exchangeViewModel = ExchangeViewModel.mock()
+        let exchangeViewModel = ExchangeModel.mock()
 
         coordinator.pushDetailsScreen(with: exchangeViewModel)
 

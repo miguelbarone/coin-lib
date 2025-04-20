@@ -12,8 +12,8 @@ final class ListPresentingSpy: ListPresenting {
     enum Message: Equatable {
         case showLoading
         case hideLoading
-        case presentItems(exchangesModel: [ExchangeModel])
-        case presentDetailsScreen(exchange: ExchangeViewModel)
+        case presentItems(exchangesModel: [ExchangeResponse])
+        case presentDetailsScreen(exchange: ExchangeModel)
         case presentErrorView
     }
 
@@ -27,11 +27,11 @@ final class ListPresentingSpy: ListPresenting {
         messages.append(.hideLoading)
     }
 
-    func presentItems(_ exchangesModel: [ExchangeModel]) {
+    func presentItems(_ exchangesModel: [ExchangeResponse]) {
         messages.append(.presentItems(exchangesModel: exchangesModel))
     }
 
-    func presentDetailsScreen(with exchange: ExchangeViewModel) {
+    func presentDetailsScreen(with exchange: ExchangeModel) {
         messages.append(.presentDetailsScreen(exchange: exchange))
     }
 
@@ -41,14 +41,20 @@ final class ListPresentingSpy: ListPresenting {
 }
 
 final class ListServiceMock: ListServicing {
-    var getExchangesResult: Result<[ExchangeModel], Error>?
+    var getExchangesResult: Result<[ExchangeResponse], Error>?
+    var exchanges: [ExchangeResponse]?
+    var error: NetworkError?
 
-    func getExchanges(completion: @escaping (Result<[ExchangeModel], Error>) -> Void) {
-        guard let result = getExchangesResult else {
-            XCTFail("getExchanges result not implemented")
-            return
+    func getExchanges() async throws -> [ExchangeResponse] {
+        if let error {
+            throw error
         }
-        completion(result)
+
+        if let exchanges {
+            return exchanges
+        }
+
+        throw NetworkError.noData
     }
 }
 
@@ -71,25 +77,38 @@ final class ListInteractorTests: XCTestCase {
         super.tearDown()
     }
 
-    func testFetchData_WhenResultIsSuccess_ShouldPresentItems() {
-        let exchangeModels = [ExchangeModel.mock()]
-        serviceMock.getExchangesResult = .success(exchangeModels)
+    func testFetchData_WhenResultIsSuccess_ShouldPresentItems() async {
+        let exchangeModels = [ExchangeResponse.mock()]
+        let expectation = XCTestExpectation(description: "fetchData completes")
 
-        interactor.fetchData()
+        serviceMock.exchanges = exchangeModels
 
-        XCTAssertEqual(presenterSpy.messages, [.showLoading, .hideLoading, .presentItems(exchangesModel: exchangeModels)])
+        Task {
+            interactor.fetchData()
+            expectation.fulfill()
+        }
+
+        await fulfillment(of: [expectation], timeout: 2)
+
+        XCTAssertEqual(presenterSpy.messages, [.showLoading, .presentItems(exchangesModel: exchangeModels), .hideLoading])
     }
 
-    func testFetchData_WhenResultIsFailure_ShouldPresentErrorView() {
-        serviceMock.getExchangesResult = .failure(NSError(domain: "", code: 0, userInfo: nil))
+    func testFetchData_WhenResultIsFailure_ShouldPresentErrorView() async {
+        let expectation = XCTestExpectation(description: "fetchData completes")
+        serviceMock.error = NetworkError.invalidURL
 
-        interactor.fetchData()
+        Task {
+            interactor.fetchData()
+            expectation.fulfill()
+        }
 
-        XCTAssertEqual(presenterSpy.messages, [.showLoading, .hideLoading, .presentErrorView])
+        await fulfillment(of: [expectation], timeout: 2)
+
+        XCTAssertEqual(presenterSpy.messages, [.showLoading, .presentErrorView, .hideLoading])
     }
 
     func testDidSelectRow_ShouldPresentDetailsScreen() {
-        let exchangeViewModel = ExchangeViewModel.mock()
+        let exchangeViewModel = ExchangeModel.mock()
 
         interactor.didSelectRow(exchange: exchangeViewModel)
 

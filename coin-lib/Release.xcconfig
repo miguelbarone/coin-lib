@@ -1,0 +1,12 @@
+//
+//  Release.xcconfig
+//  CoinLib
+//
+//  Created by Miguel Barone on 19/04/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+BASE_URL = https:/$()/rest.coinapi.io/v1
+API_KEY = CC078ABA-D4A2-43ED-A17E-B8CCF60D40AF

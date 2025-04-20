@@ -58,7 +58,7 @@ final class DetailsPresenterTests: XCTestCase {
     }
 
     func testPresentLayout_WhenWebsiteIsNotNil_ShouldDisplayNameAndWebsiteButton() {
-        let exchange = ExchangeViewModel.mock()
+        let exchange = ExchangeModel.mock()
 
         presenter.presentLayout(with: exchange)
 
@@ -69,7 +69,7 @@ final class DetailsPresenterTests: XCTestCase {
     }
 
     func testPresentLayout_WhenWebsiteIsNil_ShouldDisplayName() {
-        let exchange = ExchangeViewModel.mock(website: nil)
+        let exchange = ExchangeModel.mock(website: nil)
 
         presenter.presentLayout(with: exchange)
 
@@ -79,7 +79,7 @@ final class DetailsPresenterTests: XCTestCase {
     }
 
     func testPresentWebsite_WhenURLIsValid_ShouldCallCoordinatorToOpenWebsite() throws {
-        let exchange = ExchangeViewModel.mock()
+        let exchange = ExchangeModel.mock()
         let url = try XCTUnwrap(URL(string: "https://test.com"))
 
         presenter.presentWebsite(urlString: exchange.website)

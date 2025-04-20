@@ -7,10 +7,6 @@
 
 import Foundation
 
-enum API {
-    static let baseURL = "https://rest.coinapi.io/v1"
-}
-
 enum NetworkError: Error, Equatable {
     case invalidURL
     case invalidResponse
@@ -21,62 +17,50 @@ enum NetworkError: Error, Equatable {
 }
 
 protocol NetworkProtocol {
-    func execute<T: Decodable>(with request: Request, completion: @escaping (Result<T, Error>) -> Void)
+    func fetch<T: Decodable>(request: Request) async throws -> T
 }
 
 final class NetworkManager: NetworkProtocol {
-    private let API_KEY = "CC078ABA-D4A2-43ED-A17E-B8CCF60D40AF"
+    private let urlSession: URLSessionProtocol
 
-    let urlSession: URLSession
+    private let isUITesting = ProcessInfo().arguments.contains("UI-TESTING")
 
-    init(urlSession: URLSession = URLSession.shared) {
+    init(urlSession: URLSessionProtocol = URLSession.shared) {
         self.urlSession = urlSession
     }
 
-    func execute<T: Decodable>(with request: Request, completion: @escaping (Result<T, Error>) -> Void) {
-        let url = URL(string: API.baseURL + request.endpoint)
-        let isUITesting = ProcessInfo().arguments.contains("UI-TESTING")
-
-        if isUITesting {
-            return executeJSON(endpoint: request.endpoint, completion: completion)
+    func fetch<T: Decodable>(request: Request) async throws -> T {
+        guard let url = URL(string: Environment.baseURL + request.endpoint) else {
+            throw NetworkError.invalidURL
         }
 
-        guard let url else {
-            completion(.failure(NetworkError.invalidURL))
-            return
+        if isUITesting {
+            return try executeJSON(endpoint: request.endpoint)
         }
 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
-        urlRequest.addValue(API_KEY, forHTTPHeaderField: "Authorization")
+        urlRequest.addValue(Environment.apiKey, forHTTPHeaderField: "Authorization")
 
-        let dataTask = urlSession.dataTask(with: urlRequest) { data, response, error in
-            if let error = error {
-                completion(.failure(NetworkError.requestError(description: error.localizedDescription)))
-                return
-            }
+        let (data, response) = try await urlSession.data(for: urlRequest)
 
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                completion(.failure(NetworkError.invalidResponse))
-                return
-            }
-
-            guard let data = data else {
-                return completion(.failure(NetworkError.noData))
-            }
-
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-
-                let result = try decoder.decode(T.self, from: data)
-                completion(.success(result))
-            } catch {
-                completion(.failure(NetworkError.decodingError(description: error.localizedDescription)))
-            }
+        guard let response = response as? HTTPURLResponse else {
+            throw NetworkError.invalidResponse
         }
 
-        dataTask.resume()
+        guard (200...299).contains(response.statusCode) else {
+            throw NetworkError.requestError(description: "Unexpected error: \(response.statusCode)")
+        }
+
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        do {
+            let resultObject = try decoder.decode(T.self, from: data)
+            return resultObject
+        } catch {
+            throw NetworkError.decodingError(description: error.localizedDescription)
+        }
     }
 }
 
@@ -91,6 +75,7 @@ private extension NetworkManager {
             completion(.failure(NetworkError.noData))
             return
         }
+
         do {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -99,6 +84,26 @@ private extension NetworkManager {
             completion(.success(result))
         } catch {
             completion(.failure(NetworkError.decodingError(description: error.localizedDescription)))
+        }
+    }
+
+    func executeJSON<T: Decodable>(endpoint: String) throws -> T {
+        guard let json = ProcessInfo().environment[endpoint] else {
+            throw NetworkError.invalidEnvironment
+        }
+
+        guard let data = json.data(using: .utf8) else {
+            throw NetworkError.noData
+        }
+
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+            let result = try decoder.decode(T.self, from: data)
+            return result
+        } catch {
+            throw error
         }
     }
 }

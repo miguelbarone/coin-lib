@@ -14,9 +14,9 @@ protocol DetailsInteracting: AnyObject {
 
 final class DetailsInteractor: DetailsInteracting {
     private let presenter: DetailsPresenting
-    private let exchange: ExchangeViewModel
+    private let exchange: ExchangeModel
 
-    init(presenter: DetailsPresenting, exchange: ExchangeViewModel) {
+    init(presenter: DetailsPresenting, exchange: ExchangeModel) {
         self.presenter = presenter
         self.exchange = exchange
     }

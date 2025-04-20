@@ -7,9 +7,7 @@
 
 import Foundation
 
-struct DecodableModel: Decodable {
+struct CodableModel: Codable, Equatable {
     let id: Int
     let name: String
-
-    static let json = "{\"id\": 1, \"name\": \"Test\"}"
 }

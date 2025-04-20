@@ -10,13 +10,13 @@ import XCTest
 
 final class DetailsPresentingSpy: DetailsPresenting {
     enum Message: Equatable {
-        case presentLayout(exchange: ExchangeViewModel)
+        case presentLayout(exchange: ExchangeModel)
         case presentWebsite(urlString: String?)
     }
 
     private(set) var messages = [Message]()
 
-    func presentLayout(with exchange: ExchangeViewModel) {
+    func presentLayout(with exchange: ExchangeModel) {
         messages.append(.presentLayout(exchange: exchange))
     }
 
@@ -32,7 +32,7 @@ final class DetailsInteractorTests: XCTestCase {
     override func setUp() {
         super.setUp()
         presenterSpy = DetailsPresentingSpy()
-        interactor = DetailsInteractor(presenter: presenterSpy, exchange: ExchangeViewModel.mock())
+        interactor = DetailsInteractor(presenter: presenterSpy, exchange: ExchangeModel.mock())
     }
 
     override func tearDown() {
@@ -42,7 +42,7 @@ final class DetailsInteractorTests: XCTestCase {
     }
 
     func testInitialSetup_ShouldPresentLayoutWithExchangeInfos() {
-        let exchange = ExchangeViewModel.mock()
+        let exchange = ExchangeModel.mock()
 
         interactor.initialSetup()
 
@@ -50,7 +50,7 @@ final class DetailsInteractorTests: XCTestCase {
     }
 
     func testOpenWebsite_ShouldPresentWebsiteWithExchangeWebsiteURL() {
-        let exchange = ExchangeViewModel.mock()
+        let exchange = ExchangeModel.mock()
 
         interactor.openWebsite()
 

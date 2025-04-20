@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ListServicing: AnyObject {
-    func getExchanges(completion: @escaping (Result<[ExchangeModel], Error>) -> Void)
+    func getExchanges() async throws -> [ExchangeResponse]
 }
 
 final class ListService: ListServicing {
@@ -18,13 +18,13 @@ final class ListService: ListServicing {
         self.network = network
     }
 
-    func getExchanges(completion: @escaping (Result<[ExchangeModel], Error>) -> Void) {
-        let request = ListRequest.getExchanges()
-
-        network.execute(with: request) { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
+    func getExchanges() async throws -> [ExchangeResponse] {
+        do {
+            let request = ListRequest.getExchanges()
+            let response: [ExchangeResponse] = try await network.fetch(request: request)
+            return response
+        } catch {
+            throw error
         }
     }
 }

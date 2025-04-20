@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DetailsPresenting: AnyObject {
-    func presentLayout(with exchange: ExchangeViewModel)
+    func presentLayout(with exchange: ExchangeModel)
     func presentWebsite(urlString: String?)
 }
 
@@ -21,7 +21,7 @@ final class DetailsPresenter: DetailsPresenting {
         self.coordinator = coordinator
     }
 
-    func presentLayout(with exchange: ExchangeViewModel) {
+    func presentLayout(with exchange: ExchangeModel) {
         viewController?.displayName(exchange.name, id: exchange.id)
 
         if exchange.website != nil {

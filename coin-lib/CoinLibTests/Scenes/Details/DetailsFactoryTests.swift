@@ -10,7 +10,7 @@ import XCTest
 
 final class DetailsFactoryTests: XCTestCase {
     func testMake_ShouldReturnDetailsViewController() {
-        let viewController = DetailsFactory.make(exchange: ExchangeViewModel.mock())
+        let viewController = DetailsFactory.make(exchange: ExchangeModel.mock())
 
         XCTAssertTrue(viewController is DetailsViewController)
     }
